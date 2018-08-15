@@ -61,6 +61,12 @@ namespace NormiesRe.Controllers
         [Route("/addpost")]
         public IActionResult AddPost([Bind("Title,Content")] NewPostFormModel newPostFormModel)
         {
+            // fuck off 
+            if (newPostFormModel.Title.Trim() == "" || newPostFormModel.Content.Trim() == "")
+            {
+                return Redirect("/");
+            }
+            
             newPostService.AddPostByFormModel(newPostFormModel);
             return Redirect("/");
         }
