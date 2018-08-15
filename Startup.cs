@@ -29,6 +29,7 @@ namespace NormiesRe
             services.AddTransient<IPostListService, PostListService>();
             services.AddTransient<INewPostService, NewPostService>();
             services.AddTransient<IPostFindService, PostFindService>();
+            services.AddTransient<IPostDeleteService, PostDeleteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

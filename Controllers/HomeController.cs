@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using NormiesRe.Post;
 
 namespace NormiesRe.Controllers
@@ -8,14 +9,17 @@ namespace NormiesRe.Controllers
         private readonly IPostListService postListService;
         private readonly INewPostService newPostService;
         private readonly IPostFindService postFindService;
+        private readonly IPostDeleteService postDeleteService;
 
         public HomeController(IPostListService postListService, 
             INewPostService newPostService, 
-            IPostFindService postFindService)
+            IPostFindService postFindService, 
+            IPostDeleteService postDeleteService)
         {
             this.postListService = postListService;
             this.newPostService = newPostService;
             this.postFindService = postFindService;
+            this.postDeleteService = postDeleteService;
         }
         
         [Route("")]
@@ -40,6 +44,17 @@ namespace NormiesRe.Controllers
             }
 
             return View(viewModel);
+        }
+
+        [Route("/delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            if (Environment.GetEnvironmentVariable("DELETE_KEY") == Request.Query["key"])
+            {
+                postDeleteService.DeletePostById(id);
+            }
+
+            return Redirect("/");
         }
 
         [HttpPost]

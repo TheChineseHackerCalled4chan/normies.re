@@ -10,6 +10,7 @@ namespace NormiesRe.Post
         IReadOnlyCollection<Models.Post> GetLatestPosts(int amount);
         void SavePost(Models.Post post);
         Models.Post FindPostById(int id);
+        void DeletePostById(int id);
     }
 
     public class PostRepository : IPostRepository
@@ -40,6 +41,12 @@ namespace NormiesRe.Post
         public Models.Post FindPostById(int id)
         {
             return dbContext.Posts.FirstOrDefault(p => p.ID == id);
+        }
+
+        public void DeletePostById(int id)
+        {
+            dbContext.Posts.Remove(FindPostById(id));
+            dbContext.SaveChanges();
         }
     }
 }
