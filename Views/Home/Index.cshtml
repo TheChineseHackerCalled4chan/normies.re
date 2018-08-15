@@ -6,7 +6,21 @@
 <hr />
 <a href="/new"><button class="btn btn-primary">new</button></a>
 <hr />
-@foreach (var post in Model.Posts)
-{
-    <div><span class="badge bg-primary">@post.ReleaseDate.ToShortDateString()</span> <a href="/show/@post.ID">@post.Title</a></div>
-}
+<table class="table table-striped table-hover">
+    <tr class="row">
+        <th scope="row">Date/Time</th>
+        <th>Title</th>
+    </tr>
+    @foreach (var post in Model.Posts)
+    {
+        <tr class="row">
+            <th scope="row">
+                <span class="badge bg-primary">@post.ReleaseDate.ToShortDateString()</span>
+                <span class="badge bg-primary">@post.ReleaseDate.ToString("HH:mm:ss")</span>
+            </th>
+            <td>
+                <a href="/show/@post.ID">@post.Title</a>
+            </td>
+        </tr>
+    }
+</table>

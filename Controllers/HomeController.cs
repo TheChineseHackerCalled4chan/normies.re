@@ -62,7 +62,9 @@ namespace NormiesRe.Controllers
         public IActionResult AddPost([Bind("Title,Content")] NewPostFormModel newPostFormModel)
         {
             // fuck off 
-            if (newPostFormModel.Title.Trim() == "" || newPostFormModel.Content.Trim() == "")
+            if (newPostFormModel.Title.Trim() == "" || 
+                newPostFormModel.Content.Trim() == "" || 
+                newPostFormModel.Content.Length > 20000 || newPostFormModel.Title.Length > 200)
             {
                 return Redirect("/");
             }
