@@ -1,0 +1,13 @@
+﻿@using Westwind.AspNetCore.Markdown
+@model NormiesRe.Post.PostViewModel
+@{
+    ViewData["Title"] = @Model.Title;
+}
+<hr />
+<a href="/"><button class="btn btn-primary">return</button></a>
+<hr />
+
+<h1>@Model.Title</h1>
+<div>
+    @Markdown.ParseHtmlString(@Model.Content)
+</div>

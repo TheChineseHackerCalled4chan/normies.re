@@ -1,0 +1,12 @@
+﻿@model NormiesRe.Post.PostListViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<hr />
+<a href="/new"><button class="btn btn-primary">new</button></a>
+<hr />
+@foreach (var post in Model.Posts)
+{
+    <div><span class="badge bg-primary">@post.ReleaseDate.ToShortDateString()</span> <a href="/show/@post.ID">@post.Title</a></div>
+}
