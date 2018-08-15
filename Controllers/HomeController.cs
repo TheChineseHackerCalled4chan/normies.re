@@ -10,16 +10,19 @@ namespace NormiesRe.Controllers
         private readonly INewPostService newPostService;
         private readonly IPostFindService postFindService;
         private readonly IPostDeleteService postDeleteService;
+        private readonly INewCommentService newCommentService;
 
         public HomeController(IPostListService postListService, 
             INewPostService newPostService, 
             IPostFindService postFindService, 
-            IPostDeleteService postDeleteService)
+            IPostDeleteService postDeleteService,
+            INewCommentService newCommentService)
         {
             this.postListService = postListService;
             this.newPostService = newPostService;
             this.postFindService = postFindService;
             this.postDeleteService = postDeleteService;
+            this.newCommentService = newCommentService;
         }
         
         [Route("")]
@@ -71,6 +74,26 @@ namespace NormiesRe.Controllers
             
             newPostService.AddPostByFormModel(newPostFormModel);
             return Redirect("/");
+        }
+        
+        [HttpPost]
+        [Route("/addcomment/{postid}")]
+        public IActionResult AddComment(int postid, [Bind("Content")] NewCommentFormModel newPostFormModel)
+        {
+            if (newPostFormModel.Content.Trim() == "" || 
+                newPostFormModel.Content.Length > 20000)
+            {
+                return Redirect("/");
+            }
+
+            var post = postFindService.FindPostById(postid);
+            if (post == null)
+            {
+                return Redirect("/");
+            }
+            
+            newCommentService.AddCommentToPost(postid, newPostFormModel);
+            return Redirect($"/show/{postid}");
         }
     }
 }

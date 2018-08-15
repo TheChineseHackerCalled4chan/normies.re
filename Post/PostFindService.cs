@@ -1,4 +1,8 @@
-﻿namespace NormiesRe.Post
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+
+namespace NormiesRe.Post
 {
     public interface IPostFindService
     {
@@ -27,6 +31,13 @@
                 title: entity.Title, 
                 content: entity.Content, 
                 releaseDate: entity.ReleaseDate);
+
+            if (entity.Comments.Count > 0)
+            {
+                viewModel.Comments = entity.Comments
+                    .Select(c => new CommentViewModel(releaseDate: c.ReleaseDate, comment: c.Content))
+                    .ToImmutableList();
+            }
             
             return viewModel;
         }

@@ -8,6 +8,27 @@
 <hr />
 
 <h1>@Model.Title</h1>
-<div>
+<div style="word-break: break-all;">
     @Markdown.ParseHtmlString(@Model.Content)
 </div>
+<hr />
+<h3>Comments</h3>
+@foreach (var commentViewModel in Model.Comments)
+{
+    <div>
+        <small>
+            @commentViewModel.ReleaseDate.ToShortDateString() - @commentViewModel.ReleaseDate.ToString("HH:mm:ss")
+        </small>
+        @Markdown.ParseHtmlString(@commentViewModel.Comment)
+    </div>
+    <hr />
+}
+
+<form action="/addcomment/@Model.ID" method="POST">
+    <div class="form-group">
+        <label for="Content">Your Comment</label>
+        <small class="form-text text-muted">You can use markdown</small>
+        <textarea name="Content" id="Content" style="min-height: 200px" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
