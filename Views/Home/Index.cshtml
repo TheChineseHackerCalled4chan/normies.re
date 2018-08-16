@@ -3,14 +3,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="alert alert-success">
+<div class="alert alert-warning">
     <strong>Hello</strong> This is a blog for people who aren't normies. <br />
     In a normie world, someone writes a blog and everyone reads it. Here, everyone writes a blog and probably not-so-many will read it. <br />
     Enjoy!
 </div>
 
 <hr />
-<a href="/new"><button class="btn btn-primary">new</button></a>
+<a href="/new"><button class="btn btn-warning">new</button></a>
 <hr />
 <table class="table table-striped table-hover">
     <tr class="row">
@@ -21,8 +21,8 @@
     {
         <tr class="row">
             <th scope="row">
-                <span class="badge bg-primary">@post.ReleaseDate.ToShortDateString()</span>
-                <span class="badge bg-primary">@post.ReleaseDate.ToString("HH:mm:ss")</span>
+                <span class="badge bg-warning">@post.ReleaseDate.ToShortDateString()</span>
+                <span class="badge bg-warning">@post.ReleaseDate.ToString("HH:mm:ss")</span>
             </th>
             <td>
                 <a href="/show/@post.ID">@post.Title</a>
