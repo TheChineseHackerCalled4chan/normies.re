@@ -25,6 +25,7 @@ namespace NormiesRe.Post
                 new PostViewModel(
                     id: p.ID, 
                     content: p.Content, 
+                    country: p.Country,
                     releaseDate: p.ReleaseDate, 
                     title: p.Title)
             ).ToImmutableList();

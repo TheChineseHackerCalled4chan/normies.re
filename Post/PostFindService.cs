@@ -30,6 +30,7 @@ namespace NormiesRe.Post
                 id: entity.ID, 
                 title: entity.Title, 
                 content: entity.Content, 
+                country: entity.Content, 
                 releaseDate: entity.ReleaseDate);
 
             if (entity.Comments.Count > 0)

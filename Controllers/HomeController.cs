@@ -71,6 +71,8 @@ namespace NormiesRe.Controllers
             {
                 return Redirect("/");
             }
+
+            newPostFormModel.Country = Request.Headers["CF-IPCountry"].ToString();
             
             newPostService.AddPostByFormModel(newPostFormModel);
             return Redirect("/");

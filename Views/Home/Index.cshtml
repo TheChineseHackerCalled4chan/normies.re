@@ -20,6 +20,7 @@
     {
         <tr class="row">
             <td scope="row">
+                <span class="flag">@post.Country</span>
                 <span class="badge">@post.ReleaseDate.ToShortDateString()</span>
                 <span class="badge">@post.ReleaseDate.ToString("HH:mm:ss")</span>
                 <a href="/show/@post.ID">@post.Title</a>
@@ -27,3 +28,12 @@
         </tr>
     }
 </table>
+
+<script type="text/javascript">
+    var flags = document.querySelectorAll(".flag");
+    for (var i = 0; i < flags.length; i++) {
+        flags[i].innerHTML = flags[i].innerHTML
+            .toUpperCase()
+            .replace(/./g, char => String.fromCodePoint(char.charCodeAt(0)+127397));
+    }
+</script>

@@ -18,16 +18,18 @@ namespace NormiesRe.Post
         public readonly int ID;
         public readonly string Title;
         public readonly string Content;
+        public readonly string Country;
         public readonly DateTime ReleaseDate;
         
         public IReadOnlyCollection<CommentViewModel> Comments { get; set; } = new List<CommentViewModel>();
 
-        public PostViewModel(int id, string title, string content, DateTime releaseDate)
+        public PostViewModel(int id, string title, string content, string country, DateTime releaseDate)
         {
             ID = id;
             Title = title;
             Content = content;
             ReleaseDate = releaseDate;
+            Country = country;
         }
     }
 

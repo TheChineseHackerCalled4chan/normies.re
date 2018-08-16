@@ -22,6 +22,7 @@ namespace NormiesRe.Post
             post.Content = newPostFormModel.Content;
             post.Title = newPostFormModel.Title;
             post.ReleaseDate = DateTime.Now;
+            post.Country = newPostFormModel.Country;
             
             postRepository.SavePost(post);
         }
