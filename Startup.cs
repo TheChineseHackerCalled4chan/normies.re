@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Markdig;
+using Markdig.Extensions.AutoIdentifiers;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NormiesRe.Models;
 using NormiesRe.Post;
+using Westwind.AspNetCore.Markdown;
 
 namespace NormiesRe
 {
@@ -31,6 +34,29 @@ namespace NormiesRe
             services.AddTransient<IPostFindService, PostFindService>();
             services.AddTransient<IPostDeleteService, PostDeleteService>();
             services.AddTransient<INewCommentService, NewCommentService>();
+            
+            services.AddMarkdown(config =>
+            {
+                // Create custom MarkdigPipeline 
+                // using MarkDig; for extension methods
+                config.ConfigureMarkdigPipeline = builder =>
+                {
+                    builder.UseEmphasisExtras(Markdig.Extensions.EmphasisExtras.EmphasisExtraOptions.Default)
+                        .UsePipeTables()
+                        .UseGridTables()                        
+                        .UseAutoIdentifiers(AutoIdentifierOptions.GitHub) 
+                        .UseAutoLinks() 
+                        .UseAbbreviations()
+                        .UseYamlFrontMatter()
+                        .UseEmojiAndSmiley(true)                        
+                        .UseListExtras()
+                        .UseFigures()
+                        .UseTaskLists()
+                        .UseCustomContainers()
+                        .UseGenericAttributes()
+                        .DisableHtml();
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +79,8 @@ namespace NormiesRe
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            
+            
         }
     }
 }

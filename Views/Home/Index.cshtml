@@ -14,17 +14,14 @@
 <hr />
 <table class="table table-striped table-hover">
     <tr class="row">
-        <th scope="row">Date/Time</th>
-        <th>Title</th>
+        <th scope="row">Posts</th>
     </tr>
     @foreach (var post in Model.Posts)
     {
         <tr class="row">
-            <th scope="row">
-                <span class="badge bg-warning">@post.ReleaseDate.ToShortDateString()</span>
-                <span class="badge bg-warning">@post.ReleaseDate.ToString("HH:mm:ss")</span>
-            </th>
-            <td>
+            <td scope="row">
+                <span class="badge">@post.ReleaseDate.ToShortDateString()</span>
+                <span class="badge">@post.ReleaseDate.ToString("HH:mm:ss")</span>
                 <a href="/show/@post.ID">@post.Title</a>
             </td>
         </tr>
