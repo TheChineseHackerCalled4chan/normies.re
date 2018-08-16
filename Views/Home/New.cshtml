@@ -3,19 +3,18 @@
 }
 
 <hr />
-<a href="/"><button class="btn btn-primary">return</button></a>
+<a asp-action="Index" class="btn btn-primary">return</a>
 <hr />
-<form action="/addpost" method="POST">
+<form asp-action="AddPost" method="POST">
     <div class="form-group">
         <label for="Title">Post Title</label>
-        <input type="text" class="form-control" id="Title"  name="Title" aria-describedby="postTitleHelp" placeholder="I hate normies">
+        <input required type="text" class="form-control" id="Title"  name="Title" aria-describedby="postTitleHelp" placeholder="I hate normies">
         <small id="emailHelp" class="form-text text-muted">A funny meme or something catchy that will get you people's attention.</small>
     </div>
     <div class="form-group">
         <label for="Content">Your Bost</label>
         <small class="form-text text-muted">You can use markdown</small>
-
-        <textarea name="Content" id="Content" style="min-height: 400px" class="form-control"></textarea>
+        <textarea required name="Content" id="Content" style="min-height: 400px" class="form-control"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
