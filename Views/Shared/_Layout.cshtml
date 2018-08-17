@@ -50,7 +50,13 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
+    <script type="text/javascript">
+        let flags = document.querySelectorAll(".flag");
+        flags.forEach(flag =>
+            flag.innerHTML = flag.innerHTML.toUpperCase()
+            .replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397))
+        );
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

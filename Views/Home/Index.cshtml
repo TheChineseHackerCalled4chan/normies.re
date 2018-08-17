@@ -34,10 +34,3 @@
     </table>
 </div>
 
-<script type="text/javascript">
-    let flags = document.querySelectorAll(".flag");
-    flags.forEach(flag =>
-        flag.innerHTML = flag.innerHTML.toUpperCase()
-            .replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397))
-    );
-</script>

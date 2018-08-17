@@ -9,7 +9,7 @@
 <a asp-action="Show" asp-route-id="@nextPost" class="btn btn-primary pull-right">Next Post</a>
 <hr />
 
-<h1>@Model.Title</h1>
+<h1><span class="flag">@Model.Country</span> - @Model.Title</h1>
 <div style="word-break: break-all;">
     @Markdown.ParseHtmlString(@Model.Content)
 </div>
@@ -19,7 +19,7 @@
 {
     <div>
         <small>
-            @commentViewModel.ReleaseDate.ToShortDateString() - @commentViewModel.ReleaseDate.ToString("HH:mm:ss")
+        <span class="flag">@commentViewModel.Country</span> @commentViewModel.ReleaseDate.ToShortDateString() - @commentViewModel.ReleaseDate.ToString("HH:mm:ss")
         </small>
         @Markdown.ParseHtmlString(@commentViewModel.Comment)
     </div>

@@ -23,6 +23,7 @@ namespace NormiesRe.Post
             comment.Content = newPostFormModel.Content;
             comment.Post = postRepository.FindPostById(postId);
             comment.ReleaseDate = DateTime.Now;
+            comment.Country = newPostFormModel.Country;
             
             postRepository.SaveComment(comment);
         }

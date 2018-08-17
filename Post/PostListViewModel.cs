@@ -37,11 +37,13 @@ namespace NormiesRe.Post
     {
         public readonly DateTime ReleaseDate;
         public readonly string Comment;
+        public readonly string Country;
 
-        public CommentViewModel(DateTime releaseDate, string comment)
+        public CommentViewModel(DateTime releaseDate, string comment, string country)
         {
             ReleaseDate = releaseDate;
             Comment = comment;
+            Country = country;
         }
     }
 }

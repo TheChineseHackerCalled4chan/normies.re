@@ -92,6 +92,7 @@ namespace NormiesRe.Controllers
                 return RedirectToAction("Index");
             }
             
+            newPostFormModel.Country = Request.Headers["CF-IPCountry"].ToString();
             newCommentService.AddCommentToPost(postid, newPostFormModel);
             return RedirectToAction("Show", new { id = postid });
         }
