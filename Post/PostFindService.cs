@@ -36,7 +36,7 @@ namespace NormiesRe.Post
             if (entity.Comments.Count > 0)
             {
                 viewModel.Comments = entity.Comments
-                    .Select(c => new CommentViewModel(releaseDate: c.ReleaseDate, comment: c.Content, country: c.Country))
+                    .Select(c => new CommentViewModel(id: c.ID, releaseDate: c.ReleaseDate, comment: c.Content, country: c.Country))
                     .ToImmutableList();
             }
             

@@ -35,12 +35,14 @@ namespace NormiesRe.Post
 
     public class CommentViewModel
     {
+        public readonly int ID;
         public readonly DateTime ReleaseDate;
         public readonly string Comment;
         public readonly string Country;
 
-        public CommentViewModel(DateTime releaseDate, string comment, string country)
+        public CommentViewModel(int id, DateTime releaseDate, string comment, string country)
         {
+            ID = id;
             ReleaseDate = releaseDate;
             Comment = comment;
             Country = country;

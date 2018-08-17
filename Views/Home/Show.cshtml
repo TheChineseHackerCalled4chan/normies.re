@@ -20,6 +20,7 @@
     <div>
         <small>
         <span class="flag">@commentViewModel.Country</span> @commentViewModel.ReleaseDate.ToShortDateString() - @commentViewModel.ReleaseDate.ToString("HH:mm:ss")
+            <span class="label label-primary youable" postid="@commentViewModel.ID">Post #@commentViewModel.ID</span>
         </small>
         @Markdown.ParseHtmlString(@commentViewModel.Comment)
     </div>
@@ -34,3 +35,9 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<script type="text/javascript">
+    $(".youable").on("click", function() {
+        $("#Content").val($("#Content").val()+"@@" + $(this).attr("postid")+"\n");
+    })
+</script>
