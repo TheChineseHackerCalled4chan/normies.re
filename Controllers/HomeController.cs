@@ -24,18 +24,12 @@ namespace NormiesRe.Controllers
             this.postDeleteService = postDeleteService;
             this.newCommentService = newCommentService;
         }
-        
+
         [Route("")]
-        public IActionResult Index()
-        {
-            return View(postListService.GetNewestPosts());
-        }
+        public IActionResult Index() => View(postListService.GetNewestPosts());
 
         [Route("/new")]
-        public IActionResult New()
-        {
-            return View();
-        }
+        public IActionResult New() => View();
 
         [Route("/show/{id}")]
         public IActionResult Show(int id)
@@ -43,7 +37,7 @@ namespace NormiesRe.Controllers
             var viewModel = postFindService.FindPostById(id);
             if (viewModel == null)
             {
-                return Redirect("/");
+                return RedirectToAction("Index");
             }
 
             return View(viewModel);
@@ -57,7 +51,7 @@ namespace NormiesRe.Controllers
                 postDeleteService.DeletePostById(id);
             }
 
-            return Redirect("/");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -65,37 +59,41 @@ namespace NormiesRe.Controllers
         public IActionResult AddPost([Bind("Title,Content")] NewPostFormModel newPostFormModel)
         {
             // fuck off 
-            if (newPostFormModel.Title.Trim() == "" || 
-                newPostFormModel.Content.Trim() == "" || 
-                newPostFormModel.Content.Length > 20000 || newPostFormModel.Title.Length > 200)
+            if (string.IsNullOrWhiteSpace(newPostFormModel.Title)
+                || string.IsNullOrWhiteSpace(newPostFormModel.Content)
+                || Uri.EscapeDataString(newPostFormModel.Title).Contains("%C2%AD")
+                || Uri.EscapeDataString(newPostFormModel.Content).Contains("%C2%AD")
+                || newPostFormModel.Content.Length > 20000 || newPostFormModel.Title.Length > 200)
             {
-                return Redirect("/");
+                return RedirectToAction("Index");
             }
 
             newPostFormModel.Country = Request.Headers["CF-IPCountry"].ToString();
             
             newPostService.AddPostByFormModel(newPostFormModel);
-            return Redirect("/");
+            return RedirectToAction("Index");
         }
         
         [HttpPost]
         [Route("/addcomment/{postid}")]
         public IActionResult AddComment(int postid, [Bind("Content")] NewCommentFormModel newPostFormModel)
         {
-            if (newPostFormModel.Content.Trim() == "" || 
-                newPostFormModel.Content.Length > 20000)
+
+            if (string.IsNullOrWhiteSpace(newPostFormModel.Content)
+                || Uri.EscapeDataString(newPostFormModel.Content).Contains("%C2%AD")
+                || newPostFormModel.Content.Length > 20000)
             {
-                return Redirect("/");
+                return RedirectToAction("Index");
             }
 
             var post = postFindService.FindPostById(postid);
             if (post == null)
             {
-                return Redirect("/");
+                return RedirectToAction("Index");
             }
             
             newCommentService.AddCommentToPost(postid, newPostFormModel);
-            return Redirect($"/show/{postid}");
+            return RedirectToAction("Show", new { id = postid });
         }
     }
 }

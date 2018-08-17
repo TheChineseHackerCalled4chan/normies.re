@@ -5,10 +5,10 @@
 - switch into the directory
 - run `dotnet restore`
 - run `dotnet ef database update`
-- run `dotnet run`
+- run `dotnet run` 
+- or  `dotnet watch run` for server rebuild on save
 - visit website on localhost:5000
 
 # Contributing
 
 - All PRs are accepted as long as they more-or-less make sense and don't contain malicious code
-

@@ -2,9 +2,11 @@
 @model NormiesRe.Post.PostViewModel
 @{
     ViewData["Title"] = @Model.Title;
+    var nextPost = Model.ID + 1;
 }
 <hr />
-<a href="/"><button class="btn btn-primary">return</button></a>
+<a asp-action="Index" class="btn btn-primary">return</a>
+<a asp-action="Show" asp-route-id="@nextPost" class="btn btn-primary pull-right">Next Post</a>
 <hr />
 
 <h1>@Model.Title</h1>
@@ -24,11 +26,11 @@
     <hr />
 }
 
-<form action="/addcomment/@Model.ID" method="POST">
+<form asp-action="AddComment" asp-route-postid="@Model.ID" method="POST">
     <div class="form-group">
         <label for="Content">Your Comment</label>
         <small class="form-text text-muted">You can use markdown</small>
-        <textarea name="Content" id="Content" style="min-height: 200px" class="form-control"></textarea>
+        <textarea required name="Content" id="Content" style="min-height: 200px" class="form-control"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
